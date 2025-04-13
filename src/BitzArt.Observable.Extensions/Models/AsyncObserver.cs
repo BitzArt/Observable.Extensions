@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace BitzArt.Observable;
+namespace BitzArt;
 
 /// <summary>
 /// <inheritdoc cref="IAsyncObserver{T}"/>
@@ -9,88 +10,72 @@ namespace BitzArt.Observable;
 /// <typeparam name="T">
 /// <inheritdoc cref="IAsyncObserver{T}"/>
 /// </typeparam>/>
-public class AsyncObserver<T> : IAsyncObserver<T>, IDisposable
+internal sealed class AsyncObserver<T> : IAsyncObserver<T>, IObserver<T>
 {
-    private readonly IObservable<T> _observable;
-    private readonly IDisposable _subscription;
+    private readonly Func<T, CancellationToken, Task> _onNext;
 
-    private readonly Func<T?, Task> _onNext;
+    private readonly Func<CancellationToken, Task>? _onCompleted;
 
-    private readonly Func<Task>? _onCompleted;
+    private readonly Func<Exception, CancellationToken, Task>? _onError;
 
-    private readonly Func<Exception, Task>? _onError;
-
-    private bool _isDisposed = false;
-
-    /// <summary>
-    /// The current value of the observable.
-    /// </summary>
-    public T? CurrentValue { get; private set; } = default;
+    /// <inheritdoc cref="AsyncObserver{T}.AsyncObserver(Func{T, CancellationToken, Task}, Func{CancellationToken, Task}?, Func{Exception, CancellationToken, Task}?)"/>
+    public AsyncObserver(
+        Func<T, Task> onNext,
+        Func<Task>? onCompleted = null,
+        Func<Exception, Task>? onError = null) : this(
+            (T value, CancellationToken _) => onNext(value),
+            onCompleted is not null
+            ? (CancellationToken _) => onCompleted()
+            : null,
+            onError is not null
+            ? (Exception ex, CancellationToken _) => onError(ex)
+            : null)
+    { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AsyncObserver{T}"/> class.
     /// </summary>
-    /// <param name="observable"></param>
-    /// <param name="onNext"></param>
-    /// <param name="onCompleted"></param>
-    /// <param name="onError"></param>
+    /// <param name="onNext">A callback that is invoked when the provider has new data.</param>
+    /// <param name="onCompleted">A callback that is invoked when the provider has finished sending push-based notifications.</param>
+    /// <param name="onError">A callback that is invoked when the provider has encountered an error condition.</param>
     /// <exception cref="ArgumentNullException"></exception>
     public AsyncObserver(
-        IObservable<T> observable,
-        Func<T?, Task> onNext,
-        Func<Task>? onCompleted = null,
-        Func<Exception, Task>? onError = null)
+        Func<T, CancellationToken, Task> onNext,
+        Func<CancellationToken, Task>? onCompleted = null,
+        Func<Exception, CancellationToken, Task>? onError = null)
     {
-        ArgumentNullException.ThrowIfNull(observable, nameof(observable));
-        _observable = observable;
+        ArgumentNullException.ThrowIfNull(onNext);
 
-        ArgumentNullException.ThrowIfNull(onNext, nameof(onNext));
         _onNext = onNext;
-
         _onCompleted = onCompleted;
         _onError = onError;
-
-        _subscription = _observable.Subscribe(this);
     }
 
     /// <summary>
-    /// <inheritdoc cref="IAsyncObserver{T}.OnNextAsync(T)"/>
+    /// <inheritdoc cref="IAsyncObserver{T}.OnNextAsync(T, CancellationToken)"/>
     /// </summary>
-    public Task OnNextAsync(T? value)
-    {
-        CurrentValue = value;
-
-        _onNext(value);
-
-        return Task.CompletedTask;
-    }
+    public Task OnNextAsync(T value, CancellationToken cancellationToken = default) => _onNext.Invoke(value, cancellationToken);
 
     /// <summary>
-    /// <inheritdoc cref="IAsyncObserver{T}.OnCompletedAsync()"/>
+    /// <inheritdoc cref="IAsyncObserver{T}.OnCompletedAsync(CancellationToken)"/>
     /// </summary>
-    public Task OnCompletedAsync()
-        => _onCompleted?.Invoke() ?? Task.CompletedTask;
+    public Task OnCompletedAsync(CancellationToken cancellationToken = default)
+        => _onCompleted?.Invoke(cancellationToken) ?? Task.CompletedTask;
 
     /// <summary>
-    /// <inheritdoc cref="IAsyncObserver{T}.OnErrorAsync(Exception)"/>
+    /// <inheritdoc cref="IAsyncObserver{T}.OnErrorAsync(Exception, CancellationToken)"/>
     /// </summary>
-    public Task OnErrorAsync(Exception error)
-        => _onError?.Invoke(error) ?? Task.CompletedTask;
+    public Task OnErrorAsync(Exception error, CancellationToken cancellationToken = default)
+        => _onError?.Invoke(error, cancellationToken) ?? Task.CompletedTask;
 
-    public void OnNext(T? value) => OnNextAsync(value).Wait();
+    private const string SyncMethodNotSupportedMessage = "Synchronous IObserver methods are not supported by this observer implementation. Use ones provided by IAsyncObserver instead.";
 
-    public void OnCompleted() => OnCompletedAsync().Wait();
+    /// <inheritdoc/>
+    public void OnNext(T value) => throw new NotSupportedException(SyncMethodNotSupportedMessage);
 
-    public void OnError(Exception error) => OnErrorAsync(error).Wait();
+    /// <inheritdoc/>
+    public void OnCompleted() => throw new NotSupportedException(SyncMethodNotSupportedMessage);
 
-    /// <summary>
-    /// Disposes this <see cref="AsyncObserver{T}"/> and unsubscribes it from the observable.
-    /// </summary>
-    public void Dispose()
-    {
-        ObjectDisposedException.ThrowIf(_isDisposed, nameof(AsyncObserver<T>));
-
-        _subscription.Dispose();
-        _isDisposed = true;
-    }
+    /// <inheritdoc/>
+    public void OnError(Exception error) => throw new NotSupportedException(SyncMethodNotSupportedMessage);
 }

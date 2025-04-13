@@ -1,17 +1,21 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace BitzArt.Observable;
+namespace BitzArt;
 
 /// <summary>
 /// Provides a mechanism for observing asynchronous events.
 /// </summary>
 /// <typeparam name="T">The type of the value being observed.</typeparam>
-public interface IAsyncObserver<T> : IObserver<T>
+public interface IAsyncObserver<T>
 {
-    public Task OnNextAsync(T value);
+    /// <inheritdoc cref="IObserver{T}.OnNext(T)"/>
+    public Task OnNextAsync(T value, CancellationToken cancellationToken = default);
 
-    public Task OnCompletedAsync();
+    /// <inheritdoc cref="IObserver{T}.OnCompleted"/>
+    public Task OnCompletedAsync(CancellationToken cancellationToken = default);
 
-    public Task OnErrorAsync(Exception error);
+    /// <inheritdoc cref="IObserver{T}.OnError(Exception)"/>
+    public Task OnErrorAsync(Exception error, CancellationToken cancellationToken = default);
 }

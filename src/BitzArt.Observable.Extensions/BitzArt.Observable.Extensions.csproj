@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>net9.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
-		<RootNamespace>BitzArt.Observable.Extensions</RootNamespace>
+		<RootNamespace>BitzArt</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
 		<PackageId>BitzArt.Observable.Extensions</PackageId>
@@ -14,5 +14,9 @@
 		<PackageProjectUrl>https://github.com/BitzArt/Observable.Extensions</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="BitzArt.CoreExtensions" Version="1.2.4" />
+	</ItemGroup>
 
 </Project>

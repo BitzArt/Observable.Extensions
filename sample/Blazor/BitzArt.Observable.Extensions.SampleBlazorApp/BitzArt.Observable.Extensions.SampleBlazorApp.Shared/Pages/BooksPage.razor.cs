@@ -8,6 +8,6 @@ public partial class BooksPage : ComponentBase
 
     private async Task OnAuthorSelectedAsync(Author author)
     {
-        await _authorObservable.NotifyObserversAsync(author);
+        await _authorObservable.OnNextAsync(author);
     }
 }
