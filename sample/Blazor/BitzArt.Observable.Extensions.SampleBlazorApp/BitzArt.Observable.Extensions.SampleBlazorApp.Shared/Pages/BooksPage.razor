@@ -1,0 +1,10 @@
+﻿@namespace BitzArt.Observable.Extensions.SampleBlazorApp
+
+@page "/books"
+@rendermode InteractiveServer
+
+<PageTitle>Books Page</PageTitle>
+
+<AuthorSelector ValueChanged="OnAuthorSelectedAsync" />
+
+<BooksList AuthorObservable="_authorObservable" />
