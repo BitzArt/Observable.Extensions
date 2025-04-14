@@ -54,7 +54,8 @@ internal sealed class AsyncObserver<T> : IAsyncObserver<T>, IObserver<T>
     /// <summary>
     /// <inheritdoc cref="IAsyncObserver{T}.OnNextAsync(T, CancellationToken)"/>
     /// </summary>
-    public Task OnNextAsync(T value, CancellationToken cancellationToken = default) => _onNext.Invoke(value, cancellationToken);
+    public Task OnNextAsync(T value, CancellationToken cancellationToken = default)
+        => _onNext.Invoke(value, cancellationToken);
 
     /// <summary>
     /// <inheritdoc cref="IAsyncObserver{T}.OnCompletedAsync(CancellationToken)"/>
@@ -68,7 +69,8 @@ internal sealed class AsyncObserver<T> : IAsyncObserver<T>, IObserver<T>
     public Task OnErrorAsync(Exception error, CancellationToken cancellationToken = default)
         => _onError?.Invoke(error, cancellationToken) ?? Task.CompletedTask;
 
-    private const string SyncMethodNotSupportedMessage = "Synchronous IObserver methods are not supported by this observer implementation. Use ones provided by IAsyncObserver instead.";
+    private const string SyncMethodNotSupportedMessage
+        = "Synchronous IObserver methods are not supported by this observer implementation. Use ones provided by IAsyncObserver instead.";
 
     /// <inheritdoc/>
     public void OnNext(T value) => throw new NotSupportedException(SyncMethodNotSupportedMessage);
