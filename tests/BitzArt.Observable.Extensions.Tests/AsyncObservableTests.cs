@@ -141,7 +141,7 @@ public class AsyncObservableTests
         observable.Dispose();
 
         // Act / Assert
-        await Assert.ThrowsAnyAsync<ObjectDisposedException>(() 
+        await Assert.ThrowsAnyAsync<ObjectDisposedException>(()
             => observable.OnNextAsync(true));
     }
 
@@ -153,7 +153,7 @@ public class AsyncObservableTests
         observable.Dispose();
 
         // Act / Assert
-        await Assert.ThrowsAnyAsync<ObjectDisposedException>(() 
+        await Assert.ThrowsAnyAsync<ObjectDisposedException>(()
             => observable.OnCompletedAsync());
     }
 
@@ -165,7 +165,147 @@ public class AsyncObservableTests
         observable.Dispose();
 
         // Act / Assert
-        await Assert.ThrowsAnyAsync<ObjectDisposedException>(() 
+        await Assert.ThrowsAnyAsync<ObjectDisposedException>(()
             => observable.OnErrorAsync(new Exception()));
+    }
+
+    [Fact]
+    public void OnNextAsync_WhenSyncSubscriptionDisposed_ShouldNotNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        var subscription = observable.Subscribe(onNext: (_) =>
+        {
+            notified = true;
+        });
+
+        subscription.Dispose();
+
+        // Act
+        _ = observable.OnNextAsync(true);
+
+        // Assert
+        Assert.False(notified);
+    }
+
+    [Fact]
+    public async Task OnNextAsync_WhenAsyncSubscriptionDisposed_ShouldNotNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        var subsciption = observable.Subscribe(onNext: async (_) =>
+        {
+            await Task.Delay(100);
+            notified = true;
+        });
+
+        subsciption.Dispose();
+
+        // Act / Assert
+        var task = observable.OnNextAsync(true);
+        Assert.False(notified);
+
+        await task;
+        Assert.False(notified);
+    }
+
+    [Fact]
+    public void OnCompletedAsync_WhenSyncSubscriptionDisposed_ShouldNotNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        var subscription = observable.Subscribe(
+            onCompleted: () =>
+            {
+                notified = true;
+            },
+            onNext: (_) => { });
+
+        subscription.Dispose();
+
+        // Act
+        _ = observable.OnCompletedAsync();
+
+        // Assert
+        Assert.False(notified);
+    }
+
+    [Fact]
+    public async Task OnCompletedAsync_WhenAsyncSubscriptionDisposed_ShouldNotNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        var subscription = observable.Subscribe(
+            onCompleted: async () =>
+            {
+                await Task.Delay(100);
+                notified = true;
+            },
+            onNext: async (_) => await Task.CompletedTask);
+
+        subscription.Dispose();
+
+        // Act / Assert
+        var task = observable.OnCompletedAsync();
+        Assert.False(notified);
+
+        await task;
+        Assert.False(notified);
+    }
+
+    [Fact]
+    public void OnErrorAsync_WhenSyncSubscriptionDisposed_ShouldNotNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        var subscription = observable.Subscribe(
+            onError: (_) =>
+            {
+                notified = true;
+            },
+            onNext: (_) => { });
+
+        subscription.Dispose();
+
+        // Act
+        _ = observable.OnErrorAsync(new Exception());
+
+        // Assert
+        Assert.False(notified);
+    }
+
+    [Fact]
+    public async Task OnErrorAsync_WhenAsyncSubscriptionDisposed_ShouldNotNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        var subscription = observable.Subscribe(
+            onError: async (_) =>
+            {
+                await Task.Delay(100);
+                notified = true;
+            },
+            onNext: async (_) => await Task.CompletedTask);
+
+        subscription.Dispose();
+
+        // Act / Assert
+        var task = observable.OnErrorAsync(new Exception());
+        Assert.False(notified);
+
+        await task;
+        Assert.False(notified);
     }
 }
