@@ -1,4 +1,4 @@
-﻿using System.Threading;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace BitzArt.Observable.Extensions.Tests;
@@ -6,39 +6,166 @@ namespace BitzArt.Observable.Extensions.Tests;
 public class AsyncObservableTests
 {
     [Fact]
-    public void Constructor_WhenCalled_ShouldInitializeAsyncObservable()
-    {
-        IAsyncObservable<int> siteIdObservable = null!;
-
-        var siteIdUnsuscriber = siteIdObservable.Subscribe((value) =>
-        {
-            var siteId = value;
-        });
-    }
-
-    [Fact]
-    public async Task NotifyObserversAsync_WhenCalled_ShouldNotifyObservers()
+    public void OnNextAsync_WhenSyncSubscription_ShouldNotify()
     {
         // Arrange
         var notified = false;
+        AsyncObservable<bool> observable = new();
 
-        AsyncObservable<int?> observable = new();
-
-        var cts = new CancellationTokenSource();
-        var cancellationToken = cts.Token;
-
-        observable.Subscribe(async (_) =>
+        observable.Subscribe(onNext: (_) =>
         {
             notified = true;
-            await Task.Delay(0, cancellationToken);
         });
 
-        cts.Cancel();
-
         // Act
-        await observable.OnNextAsync(1);
+        _ = observable.OnNextAsync(true);
 
         // Assert
         Assert.True(notified);
+    }
+
+    [Fact]
+    public async Task OnNextAsync_WhenAsyncSubscription_ShouldNotifyAndAwait()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        observable.Subscribe(onNext: async (_) =>
+        {
+            await Task.Delay(100);
+            notified = true;
+        });
+
+        // Act / Assert
+        var task = observable.OnNextAsync(true);
+        Assert.False(notified);
+
+        await task;
+        Assert.True(notified);
+    }
+
+    [Fact]
+    public void OnCompletedAsync_WhenSyncSubscription_ShouldNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        observable.Subscribe(
+            onCompleted: () =>
+            {
+                notified = true;
+            },
+            onNext: (_) => { });
+
+        // Act
+        _ = observable.OnCompletedAsync();
+
+        // Assert
+        Assert.True(notified);
+    }
+
+    [Fact]
+    public async Task OnCompletedAsync_WhenAsyncSubscription_ShouldNotifyAndAwait()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        observable.Subscribe(
+            onCompleted: async () =>
+            {
+                await Task.Delay(100);
+                notified = true;
+            },
+            onNext: async (_) => await Task.CompletedTask);
+
+        // Act / Assert
+        var task = observable.OnCompletedAsync();
+        Assert.False(notified);
+
+        await task;
+        Assert.True(notified);
+    }
+
+    [Fact]
+    public void OnErrorAsync_WhenSyncSubscription_ShouldNotify()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        observable.Subscribe(
+            onError: (_) =>
+            {
+                notified = true;
+            },
+            onNext: (_) => { });
+
+        // Act
+        _ = observable.OnErrorAsync(new Exception());
+
+        // Assert
+        Assert.True(notified);
+    }
+
+    [Fact]
+    public async Task OnErrorAsync_WhenAsyncSubscription_ShouldNotifyAndAwait()
+    {
+        // Arrange
+        var notified = false;
+        AsyncObservable<bool> observable = new();
+
+        observable.Subscribe(
+            onError: async (_) =>
+            {
+                await Task.Delay(100);
+                notified = true;
+            },
+            onNext: async (_) => await Task.CompletedTask);
+
+        // Act / Assert
+        var task = observable.OnErrorAsync(new Exception());
+        Assert.False(notified);
+
+        await task;
+        Assert.True(notified);
+    }
+
+    [Fact]
+    public async Task OnNextAsync_WhenDisposed_ShouldThrow()
+    {
+        // Arrange
+        AsyncObservable<bool> observable = new();
+        observable.Dispose();
+
+        // Act / Assert
+        await Assert.ThrowsAnyAsync<ObjectDisposedException>(() 
+            => observable.OnNextAsync(true));
+    }
+
+    [Fact]
+    public async Task OnCompletedAsync_WhenDisposed_ShouldThrow()
+    {
+        // Arrange
+        AsyncObservable<bool> observable = new();
+        observable.Dispose();
+
+        // Act / Assert
+        await Assert.ThrowsAnyAsync<ObjectDisposedException>(() 
+            => observable.OnCompletedAsync());
+    }
+
+    [Fact]
+    public async Task OnErrorAsync_WhenDisposed_ShouldThrow()
+    {
+        // Arrange
+        AsyncObservable<bool> observable = new();
+        observable.Dispose();
+
+        // Act / Assert
+        await Assert.ThrowsAnyAsync<ObjectDisposedException>(() 
+            => observable.OnErrorAsync(new Exception()));
     }
 }

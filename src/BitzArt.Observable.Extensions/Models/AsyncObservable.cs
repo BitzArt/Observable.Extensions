@@ -11,10 +11,11 @@ namespace BitzArt;
 /// <typeparam name="T">Type of observable value.</typeparam>
 public sealed class AsyncObservable<T> : IAsyncObservable<T>, IDisposable
 {
-    private bool _isDisposed = false;
-
     private readonly List<IObserver<T>> _observers = [];
+    
     private readonly Lock _lockObject = new();
+
+    private bool _isDisposed = false;
 
     /// <summary>
     /// Subscribe an observer to this observable.
@@ -44,11 +45,12 @@ public sealed class AsyncObservable<T> : IAsyncObservable<T>, IDisposable
     /// <param name="ignoreCancellation">Whether to ignore <see cref="TaskCanceledException"/> occurring in observer callbacks.</param>
     /// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public async Task OnNextAsync(T value, bool ignoreCancellation = true, CancellationToken cancellationToken = default) => await NotifyAsync(
-        observer => observer.OnNext(value),
-        observer => observer.OnNextAsync(value, cancellationToken),
-        ignoreCancellation,
-        cancellationToken);
+    public async Task OnNextAsync(T value, bool ignoreCancellation = true, CancellationToken cancellationToken = default) 
+        => await NotifyAsync(
+            observer => observer.OnNext(value),
+            observer => observer.OnNextAsync(value, cancellationToken),
+            ignoreCancellation,
+            cancellationToken);
 
     /// <summary>
     /// Notifies all subscribed observers that the provider has finished sending push-based notifications.
