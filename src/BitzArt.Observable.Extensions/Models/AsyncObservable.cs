@@ -12,7 +12,7 @@ namespace BitzArt;
 public sealed class AsyncObservable<T> : IAsyncObservable<T>, IDisposable
 {
     private readonly List<IObserver<T>> _observers = [];
-    
+
     private readonly Lock _lockObject = new();
 
     private bool _isDisposed = false;
@@ -45,7 +45,7 @@ public sealed class AsyncObservable<T> : IAsyncObservable<T>, IDisposable
     /// <param name="ignoreCancellation">Whether to ignore <see cref="TaskCanceledException"/> occurring in observer callbacks.</param>
     /// <param name="cancellationToken">A cancellation token to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public async Task OnNextAsync(T value, bool ignoreCancellation = true, CancellationToken cancellationToken = default) 
+    public async Task OnNextAsync(T value, bool ignoreCancellation = true, CancellationToken cancellationToken = default)
         => await NotifyAsync(
             observer => observer.OnNext(value),
             observer => observer.OnNextAsync(value, cancellationToken),

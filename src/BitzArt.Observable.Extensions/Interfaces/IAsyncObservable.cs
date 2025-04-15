@@ -8,5 +8,4 @@ namespace BitzArt;
 /// <typeparam name="T"></typeparam>
 public interface IAsyncObservable<T> : IObservable<T>
 {
-
 }
