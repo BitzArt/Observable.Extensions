@@ -12,10 +12,8 @@ public class AsyncObservableExtensionsTests
         IAsyncObservable<bool> observable = new AsyncObservable<bool>();
 
         // Act
-        var disposable = observable.Subscribe(async (_) => 
-        { 
-            await Task.Delay(0); 
-        });
+        var disposable = observable.Subscribe(async (_) 
+            => await Task.CompletedTask);
 
         // Assert
         Assert.NotNull(disposable);
