@@ -1,2 +1,2 @@
 # Observable.Extensions
-Various extensions of IObservable functionality
+Various IObservable functionality extensions
