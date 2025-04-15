@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.SampleBlazorApp.Shared", "sample\Blazor\BitzArt.Observable.Extensions.SampleBlazorApp\BitzArt.Observable.Extensions.SampleBlazorApp.Shared\BitzArt.Observable.Extensions.SampleBlazorApp.Shared.csproj", "{49A5B477-B872-428F-BA91-56DCA8F57576}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{29F51852-DE00-405B-B1A0-D88EB617F83A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{29F51852-DE00-405B-B1A0-D88EB617F83A}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
