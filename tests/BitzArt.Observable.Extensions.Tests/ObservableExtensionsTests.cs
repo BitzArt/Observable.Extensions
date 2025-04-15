@@ -5,16 +5,35 @@ namespace BitzArt.Observable.Extensions.Tests;
 public class ObservableExtensionsTests
 {
     [Fact]
-    public void Subscribe_WhenCalled_ShouldReturnDisposable()
+    public void Subscribe_WhenCallbacksPassed_ShouldReturnObservableSubscriptionResult()
     {
         // Arrange
-        IObservable<bool> observable = new AsyncObservable<bool>();
+        var expectedResult = new TestDisposable();
+        IObservable<bool> observable = new TestObservable<bool>(_ => expectedResult);
 
         // Act
-        var disposable = observable.Subscribe((_) => { });
+        var result = observable.Subscribe((_) => { });
 
         // Assert
-        Assert.NotNull(disposable);
-        Assert.IsAssignableFrom<IDisposable>(disposable);
+        Assert.NotNull(result);
+        Assert.Same(expectedResult, result);
+    }
+
+    private class TestObservable<T> : IObservable<T>
+    {
+        private readonly Func<IObserver<T>, IDisposable> _subscribe;
+
+        public TestObservable(Func<IObserver<T>, IDisposable> subscribe)
+        {
+            _subscribe = subscribe;
+        }
+
+        public IDisposable Subscribe(IObserver<T> observer)
+            => _subscribe(observer);
+    }
+
+    private class TestDisposable : IDisposable
+    {
+        public void Dispose() => throw new NotImplementedException();
     }
 }

@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>BitzArt.Observable.Extensions.SampleBlazorApp</RootNamespace>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
@@ -24,9 +24,9 @@
 			<_Parameter1>BitzArt.Observable.Extensions.SampleBlazorApp.Server</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
-	
+
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\src\BitzArt.Observable.Extensions\BitzArt.Observable.Extensions.csproj" />
+		<ProjectReference Include="..\..\..\..\src\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj" />
 	</ItemGroup>
 
 </Project>

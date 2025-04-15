@@ -6,22 +6,22 @@ namespace BitzArt.Observable.Extensions.Tests;
 public class AsyncObservableTests
 {
     [Fact]
-    public void OnNextAsync_WhenSyncSubscription_ShouldNotify()
+    public void OnNextAsync_WhenObserverSubscribed_ShouldTriggerOnNextInObserver()
     {
         // Arrange
-        var notified = false;
+        var triggered = false;
         AsyncObservable<bool> observable = new();
 
         observable.Subscribe(onNext: (_) =>
         {
-            notified = true;
+            triggered = true;
         });
 
         // Act
         _ = observable.OnNextAsync(true);
 
         // Assert
-        Assert.True(notified);
+        Assert.True(triggered);
     }
 
     [Fact]
@@ -170,24 +170,25 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public void OnNextAsync_WhenSyncSubscriptionDisposed_ShouldNotNotify()
+    public void OnNextAsync_WhenSubscribedObserverDisposed_ShouldNotTriggerOnNextInObserver()
     {
         // Arrange
-        var notified = false;
+        bool expectedValue = true;
         AsyncObservable<bool> observable = new();
 
-        var subscription = observable.Subscribe(onNext: (_) =>
-        {
-            notified = true;
-        });
+        var subscription = observable.Subscribe(
+            onNext: (value) =>
+            {
+                expectedValue = value;
+            });
 
         subscription.Dispose();
 
         // Act
-        _ = observable.OnNextAsync(true);
+        _ = observable.OnNextAsync(false);
 
         // Assert
-        Assert.False(notified);
+        Assert.True(expectedValue);
     }
 
     [Fact]

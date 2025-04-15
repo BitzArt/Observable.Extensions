@@ -6,7 +6,7 @@
 		<RootNamespace>BitzArt</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<PackageId>BitzArt.Observable.Extensions</PackageId>
+		<PackageId>BitzArt.Observable.Extensions.Async</PackageId>
 		<Authors>BitzArt</Authors>
 		<Description>Observable Extensions</Description>
 		<RepositoryType>git</RepositoryType>
@@ -16,7 +16,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BitzArt.CoreExtensions" Version="1.2.4" />
+		<ProjectReference Include="..\BitzArt.Observable.Extensions\BitzArt.Observable.Extensions.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,22 +1,20 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace BitzArt.Observable.Extensions.Tests;
 
 public class AsyncObservableExtensionsTests
 {
     [Fact]
-    public void Subscribe_WhenCalled_ShouldReturnDisposable()
+    public void Subscribe_WhenCalled_ShouldReturnSubscription()
     {
         // Arrange
         IAsyncObservable<bool> observable = new AsyncObservable<bool>();
 
         // Act
-        var disposable = observable.Subscribe(async (_) 
+        var subscription = observable.Subscribe(async (_) 
             => await Task.CompletedTask);
 
         // Assert
-        Assert.NotNull(disposable);
-        Assert.IsAssignableFrom<IDisposable>(disposable);
+        Assert.NotNull(subscription);
     }
 }
