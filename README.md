@@ -5,7 +5,7 @@
 
 ## Overview
 
-**BitzArt.Observable.Extensions** is a nuget package that provides various extensions of IObservable functionality.
+**BitzArt.Observable.Extensions** is a nuget package that provides various IObservable functionality extensions.
 
 ### Installation
 
@@ -13,44 +13,6 @@
 
 ```
 dotnet add package BitzArt.Observable.Extensions
-```
-
-### Usage
-
-The following example shows how initialize an observable and notify its subscribers:
-
-```csharp
-using BitzArt;
-...
-
-public AsyncObservable<bool> Observable = new();
-...
-
-await Observable.OnNextAsync(true);
-
-```
-
-The following example shows how to subscribe to an observable to receive notifications:
-
-```csharp
-using BitzArt;
-...
-
-public class YourObservableConsumer()
-{
-	private IAsyncObservable<bool> _observable;
-
-	public ObservableConsumer(IAsyncObservable<bool> observable)
-	{
-		_observable = observable;
-		
-		_observable.Subscribe(async (value) =>
-		{
-			// Async operation
-		});
-	}
-}
-
 ```
 
 ## License

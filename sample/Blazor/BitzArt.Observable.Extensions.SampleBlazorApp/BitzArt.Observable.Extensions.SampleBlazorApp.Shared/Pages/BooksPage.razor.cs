@@ -5,7 +5,6 @@ namespace BitzArt.Observable.Extensions.SampleBlazorApp;
 public partial class BooksPage : ComponentBase, IDisposable
 {
     private readonly AsyncObservable<Author> _authorObservable = new();
-    private IDisposable _authorObserver = null!;
 
     private readonly List<Author> _authors = [.. SampleData.Authors];
 
@@ -13,16 +12,16 @@ public partial class BooksPage : ComponentBase, IDisposable
 
     private bool _isLoading = false;
 
-    private async Task OnAuthorSelectedAsync(ChangeEventArgs e)
+    private async Task OnAuthorSelectedAsync(ChangeEventArgs args)
     {
-        var id = e.Value!.ToString();
+        var id = args.Value!.ToString();
         var author = _authors.First(x => x.Id!.ToString() == id);
         await _authorObservable.OnNextAsync(author);
     }
 
     protected override void OnInitialized()
     {
-        _authorObserver = _authorObservable.Subscribe(async (author) =>
+        _authorObservable.Subscribe(async (author) =>
         {
             _isLoading = true;
             _books = await GetBooksAsync(author.Id!.Value);
@@ -41,7 +40,7 @@ public partial class BooksPage : ComponentBase, IDisposable
 
     public void Dispose()
     {
-        _authorObserver.Dispose();
+        _authorObservable.Dispose();
         GC.SuppressFinalize(this);
     }
 }
