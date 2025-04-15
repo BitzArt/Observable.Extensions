@@ -5,6 +5,32 @@
 
 <PageTitle>Books Page</PageTitle>
 
-<AuthorSelector ValueChanged="OnAuthorSelectedAsync" />
+<div>
+    <b>Select an author:</b>
+</div>
 
-<BooksList AuthorObservable="_authorObservable" />
+<select @onchange="OnAuthorSelectedAsync">
+    <option selected hidden>-</option>
+    @foreach (var author in _authors)
+    {
+        <option value="@author.Id">
+            @author.Name
+        </option>
+    }
+</select>
+
+<div>
+    <b>Books List:</b>
+
+    @if (_isLoading)
+    {
+        <div>Loading...</div>
+    }
+    else
+    {
+        @foreach (var book in _books)
+        {
+            <div>@book.Title</div>
+        }
+    }
+</div>
