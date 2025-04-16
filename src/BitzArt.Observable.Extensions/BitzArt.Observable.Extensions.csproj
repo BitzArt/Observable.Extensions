@@ -17,7 +17,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BitzArt.CoreExtensions" Version="1.2.4" />
+		<ProjectReference Include="..\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj" />
 	</ItemGroup>
 
 </Project>

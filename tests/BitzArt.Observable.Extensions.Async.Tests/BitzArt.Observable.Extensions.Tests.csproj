@@ -4,7 +4,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RootNamespace>BitzArt.Observable.Extensions.Async.Tests</RootNamespace>
+		<RootNamespace>BitzArt.Observable.Extensions.Tests</RootNamespace>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
@@ -16,7 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj" />
+	  <ProjectReference Include="..\..\src\BitzArt.Observable.Extensions\BitzArt.Observable.Extensions.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

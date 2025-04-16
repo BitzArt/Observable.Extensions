@@ -41,4 +41,3 @@ jobs:
       - name: Push
         run: | 
           dotnet nuget push BitzArt.Observable.Extensions.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_APIKEY}
-          dotnet nuget push BitzArt.Observable.Extensions.Async${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_APIKEY}

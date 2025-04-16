@@ -1,4 +1,4 @@
-﻿namespace BitzArt.Observable.Extensions.Async.Tests;
+﻿namespace BitzArt.Observable.Extensions.Tests;
 
 public class AsyncObservableTests
 {

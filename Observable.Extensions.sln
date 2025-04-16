@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{29F51852-DE0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Async", "src\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj", "{2036E260-705D-4231-8B68-3B2169E5674C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Async.Tests", "tests\BitzArt.Observable.Extensions.Async.Tests\BitzArt.Observable.Extensions.Async.Tests.csproj", "{66C046C2-DAA8-458F-B1FE-1979F0041444}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Tests", "tests\BitzArt.Observable.Extensions.Async.Tests\BitzArt.Observable.Extensions.Tests.csproj", "{66C046C2-DAA8-458F-B1FE-1979F0041444}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0494A74D-EB49-4713-93F6-F9323DF95EC5}"
 EndProject
