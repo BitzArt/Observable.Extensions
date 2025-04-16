@@ -1,9 +1,11 @@
 ﻿namespace BitzArt;
 
 /// <summary>
-/// A provider for async push-based events.
+/// <inheritdoc cref="IAsyncObservable{T}"/>
 /// </summary>
-/// <typeparam name="T">Type of observable value.</typeparam>
+/// <typeparam name="T">
+/// <inheritdoc cref="IAsyncObservable{T}"/>
+/// </typeparam>/>
 public sealed class AsyncObservable<T> : IAsyncObservable<T>, IDisposable
 {
     private readonly List<IObserver<T>> _observers = [];

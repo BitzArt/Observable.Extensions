@@ -5,7 +5,7 @@
 /// </summary>
 /// <typeparam name="T">
 /// <inheritdoc cref="IAsyncObserver{T}"/>
-/// </typeparam>/>
+/// </typeparam>
 internal sealed class AsyncObserver<T> : IAsyncObserver<T>, IObserver<T>
 {
     private readonly Func<T, CancellationToken, Task> _onNext;
