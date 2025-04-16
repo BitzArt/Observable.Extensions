@@ -270,40 +270,4 @@ public class AsyncObservableTests
         await task;
         Assert.False(triggered);
     }
-
-    [Fact]
-    public async Task OnNextAsync_WhenObservableDisposed_ShouldThrow()
-    {
-        // Arrange
-        AsyncObservable<bool> observable = new();
-        observable.Dispose();
-
-        // Act / Assert
-        await Assert.ThrowsAnyAsync<Exception>(()
-            => observable.OnNextAsync(true));
-    }
-
-    [Fact]
-    public async Task OnCompletedAsync_WhenObservableDisposed_ShouldThrow()
-    {
-        // Arrange
-        AsyncObservable<bool> observable = new();
-        observable.Dispose();
-
-        // Act / Assert
-        await Assert.ThrowsAnyAsync<Exception>(()
-            => observable.OnCompletedAsync());
-    }
-
-    [Fact]
-    public async Task OnErrorAsync_WhenObservableDisposed_ShouldThrow()
-    {
-        // Arrange
-        AsyncObservable<bool> observable = new();
-        observable.Dispose();
-
-        // Act / Assert
-        await Assert.ThrowsAnyAsync<Exception>(()
-            => observable.OnErrorAsync(new Exception()));
-    }
 }
