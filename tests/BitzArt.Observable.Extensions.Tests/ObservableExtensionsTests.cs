@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BitzArt.Observable.Extensions.Tests;
+﻿namespace BitzArt.Observable.Extensions.Tests;
 
 public class ObservableExtensionsTests
 {

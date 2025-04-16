@@ -2,7 +2,7 @@
 
 namespace BitzArt.Observable.Extensions.SampleBlazorApp;
 
-public partial class BooksPage : ComponentBase, IDisposable
+public partial class BooksPage : ComponentBase
 {
     private readonly AsyncObservable<Author> _authorObservable = new();
 
@@ -37,11 +37,5 @@ public partial class BooksPage : ComponentBase, IDisposable
         // Simulate async operation
         await Task.Delay(500);
         return [.. SampleData.Books.Where(x => x.AuthorId == authorId)];
-    }
-
-    public void Dispose()
-    {
-        _authorObservable.Dispose();
-        GC.SuppressFinalize(this);
     }
 }
