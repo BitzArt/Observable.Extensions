@@ -5,7 +5,7 @@ namespace BitzArt.Observable.Extensions.Tests;
 public class ObservableExtensionsTests
 {
     [Fact]
-    public void Subscribe_WhenCallbacksPassed_ShouldReturnObservableSubscriptionResult()
+    public void Subscribe_WhenCallbacksPassed_ShouldReturnCorrectObservableSubscriptionResult()
     {
         // Arrange
         var expectedResult = new TestDisposable();
