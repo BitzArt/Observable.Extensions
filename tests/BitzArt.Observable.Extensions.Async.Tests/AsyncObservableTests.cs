@@ -7,57 +7,15 @@ public class AsyncObservableTests
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool?> observable = new();
 
-        observable.Subscribe(onNext: (_) =>
-        {
-            triggered = true;
-        });
-
-        // Act
-        _ = observable.OnNextAsync(null!);
-
-        // Assert
-        Assert.True(triggered);
-    }
-
-    [Fact]
-    public void OnCompletedAsync_WhenObserverSubscribed_ShouldTriggerOnCompletedInObserver()
-    {
-        // Arrange
-        var triggered = false;
-        AsyncObservable<bool> observable = new();
-
-        observable.Subscribe(
-            onCompleted: () =>
+        var sut = new AsyncObservableSut<bool?>(
+            onNext: (_) =>
             {
                 triggered = true;
-            },
-            onNext: (_) => { });
+            });
 
         // Act
-        _ = observable.OnCompletedAsync();
-
-        // Assert
-        Assert.True(triggered);
-    }
-
-    [Fact]
-    public void OnErrorAsync_WhenObserverSubscribed_ShouldTriggerOnErrorInObserver()
-    {
-        // Arrange
-        var triggered = false;
-        AsyncObservable<bool> observable = new();
-
-        observable.Subscribe(
-            onError: (_) =>
-            {
-                triggered = true;
-            },
-            onNext: (_) => { });
-
-        // Act
-        _ = observable.OnErrorAsync(null!);
+        _ = sut.Observable.OnNextAsync(null!);
 
         // Assert
         Assert.True(triggered);
@@ -68,62 +26,16 @@ public class AsyncObservableTests
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool?> observable = new();
 
-        observable.Subscribe(onNext: async (_) =>
-        {
-            await Task.Delay(100);
-            triggered = true;
-        });
-
-        // Act / Assert
-        var task = observable.OnNextAsync(null!);
-        Assert.False(triggered);
-
-        await task;
-        Assert.True(triggered);
-    }
-
-    [Fact]
-    public async Task OnCompletedAsync_WhenAsyncObserverSubscribed_ShouldTriggerAndAwaitOnCompletedInObserver()
-    {
-        // Arrange
-        var triggered = false;
-        AsyncObservable<bool> observable = new();
-
-        observable.Subscribe(
-            onCompleted: async () =>
+        var sut = new AsyncObservableSut<bool?>(
+            onNext: async (_) =>
             {
                 await Task.Delay(100);
                 triggered = true;
-            },
-            onNext: async (_) => await Task.CompletedTask);
+            });
 
         // Act / Assert
-        var task = observable.OnCompletedAsync();
-        Assert.False(triggered);
-
-        await task;
-        Assert.True(triggered);
-    }
-
-    [Fact]
-    public async Task OnErrorAsync_WhenAsyncObserverSubscribed_ShouldTriggerAndAwaitOnErrorInObserver()
-    {
-        // Arrange
-        var triggered = false;
-        AsyncObservable<bool> observable = new();
-
-        observable.Subscribe(
-            onError: async (_) =>
-            {
-                await Task.Delay(100);
-                triggered = true;
-            },
-            onNext: async (_) => await Task.CompletedTask);
-
-        // Act / Assert
-        var task = observable.OnErrorAsync(null!);
+        var task = sut.Observable.OnNextAsync(null!);
         Assert.False(triggered);
 
         await task;
@@ -135,64 +47,17 @@ public class AsyncObservableTests
     {
         // Arrange
         bool triggered = false;
-        AsyncObservable<bool?> observable = new();
 
-        var subscription = observable.Subscribe(
-            onNext: (value) =>
+        var sut = new AsyncObservableSut<bool?>(
+            onNext: (_) =>
             {
                 triggered = true;
             });
 
-        subscription.Dispose();
+        sut.Subscription.Dispose();
 
         // Act
-        _ = observable.OnNextAsync(null!);
-
-        // Assert
-        Assert.False(triggered);
-    }
-
-    [Fact]
-    public void OnCompletedAsync_WhenSubscribedObserverDisposed_ShouldNotTriggerOnCompletedInObserver()
-    {
-        // Arrange
-        var triggered = false;
-        AsyncObservable<bool> observable = new();
-
-        var subscription = observable.Subscribe(
-            onCompleted: () =>
-            {
-                triggered = true;
-            },
-            onNext: (_) => { });
-
-        subscription.Dispose();
-
-        // Act
-        _ = observable.OnCompletedAsync();
-
-        // Assert
-        Assert.False(triggered);
-    }
-
-    [Fact]
-    public void OnErrorAsync_WhenSubscribedObserverDisposed_ShouldNotTriggerOnErrorInObserver()
-    {
-        // Arrange
-        var triggered = false;
-        AsyncObservable<bool> observable = new();
-
-        var subscription = observable.Subscribe(
-            onError: (_) =>
-            {
-                triggered = true;
-            },
-            onNext: (_) => { });
-
-        subscription.Dispose();
-
-        // Act
-        _ = observable.OnErrorAsync(null!);
+        _ = sut.Observable.OnNextAsync(null!);
 
         // Assert
         Assert.False(triggered);
@@ -222,27 +87,147 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public async Task OnCompletedAsync_WhenSubscribedAsyncObserverDisposed_ShouldNotTriggerOnCompletedInObserver()
+    public void OnCompletedAsync_WhenObserverSubscribed_ShouldTriggerOnCompletedInObserver()
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool> observable = new();
 
-        var subscription = observable.Subscribe(
+        var sut = new AsyncObservableSut<bool>(
+            onCompleted: () =>
+            {
+                triggered = true;
+            });
+
+        // Act
+        _ = sut.Observable.OnCompletedAsync();
+
+        // Assert
+        Assert.True(triggered);
+    }
+
+    [Fact]
+    public async Task OnCompletedAsync_WhenAsyncObserverSubscribed_ShouldTriggerAndAwaitOnCompletedInObserver()
+    {
+        // Arrange
+        var triggered = false;
+
+        var sut = new AsyncObservableSut<bool>(
             onCompleted: async () =>
             {
                 await Task.Delay(100);
                 triggered = true;
-            },
-            onNext: async (_) => await Task.CompletedTask);
-
-        subscription.Dispose();
+            });
 
         // Act / Assert
-        var task = observable.OnCompletedAsync();
+        var task = sut.Observable.OnCompletedAsync();
         Assert.False(triggered);
 
         await task;
+        Assert.True(triggered);
+    }
+
+    [Fact]
+    public void OnCompletedAsync_WhenSubscribedObserverDisposed_ShouldNotTriggerOnCompletedInObserver()
+    {
+        // Arrange
+        var triggered = false;
+
+        var sut = new AsyncObservableSut<bool>(
+            onCompleted: () =>
+            {
+                triggered = true;
+            });
+
+        sut.Subscription.Dispose();
+
+        // Act
+        _ = sut.Observable.OnCompletedAsync();
+
+        // Assert
+        Assert.False(triggered);
+    }
+
+    [Fact]
+    public async Task OnCompletedAsync_WhenSubscribedAsyncObserverDisposed_ShouldNotTriggerOnCompletedInObserver()
+    {
+        // Arrange
+        var triggered = false;
+
+        var sut = new AsyncObservableSut<bool>(
+            onCompleted: async () =>
+            {
+                await Task.Delay(100);
+                triggered = true;
+            });
+
+        sut.Subscription.Dispose();
+
+        // Act / Assert
+        var task = sut.Observable.OnCompletedAsync();
+        Assert.False(triggered);
+
+        await task;
+        Assert.False(triggered);
+    }
+
+    [Fact]
+    public void OnErrorAsync_WhenObserverSubscribed_ShouldTriggerOnErrorInObserver()
+    {
+        // Arrange
+        var triggered = false;
+
+        var sut = new AsyncObservableSut<bool>(
+            onError: (_) =>
+            {
+                triggered = true;
+            });
+
+        // Act
+        _ = sut.Observable.OnErrorAsync(null!);
+
+        // Assert
+        Assert.True(triggered);
+    }
+
+    [Fact]
+    public async Task OnErrorAsync_WhenAsyncObserverSubscribed_ShouldTriggerAndAwaitOnErrorInObserver()
+    {
+        // Arrange
+        var triggered = false;
+
+        var sut = new AsyncObservableSut<bool>(
+            onError: async (_) =>
+            {
+                await Task.Delay(100);
+                triggered = true;
+            });
+
+        // Act / Assert
+        var task = sut.Observable.OnErrorAsync(null!);
+        Assert.False(triggered);
+
+        await task;
+        Assert.True(triggered);
+    }
+
+    [Fact]
+    public void OnErrorAsync_WhenSubscribedObserverDisposed_ShouldNotTriggerOnErrorInObserver()
+    {
+        // Arrange
+        var triggered = false;
+
+        var sut = new AsyncObservableSut<bool>(
+            onError: (_) =>
+            {
+                triggered = true;
+            });
+
+        sut.Subscription.Dispose();
+
+        // Act
+        _ = sut.Observable.OnErrorAsync(null!);
+
+        // Assert
         Assert.False(triggered);
     }
 
@@ -251,23 +236,40 @@ public class AsyncObservableTests
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool> observable = new();
 
-        var subscription = observable.Subscribe(
+        var sut = new AsyncObservableSut<bool>(
             onError: async (_) =>
             {
                 await Task.Delay(100);
                 triggered = true;
-            },
-            onNext: async (_) => await Task.CompletedTask);
+            });
 
-        subscription.Dispose();
+        sut.Subscription.Dispose();
 
         // Act / Assert
-        var task = observable.OnErrorAsync(null!);
+        var task = sut.Observable.OnErrorAsync(null!);
         Assert.False(triggered);
 
         await task;
         Assert.False(triggered);
+    }
+
+    private record AsyncObservableSut<T>
+    {
+        public AsyncObservable<T> Observable { get; } = new();
+
+        public IDisposable Subscription { get; }
+
+        public AsyncObservableSut(Action<T>? onNext = null, Action? onCompleted = null, Action<Exception>? onError = null)
+        {
+            onNext ??= (_) => { };
+            Subscription = Observable.Subscribe(onNext, onCompleted, onError);
+        }
+
+        public AsyncObservableSut(Func<T, Task>? onNext = null, Func<Task>? onCompleted = null, Func<Exception, Task>? onError = null)
+        {
+            onNext ??= (_) => Task.CompletedTask;
+            Subscription = Observable.Subscribe(onNext, onCompleted, onError);
+        }
     }
 }
