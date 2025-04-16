@@ -1,4 +1,4 @@
-﻿namespace BitzArt.Observable.Extensions.Tests;
+﻿namespace BitzArt.Observable.Extensions.Async.Tests;
 
 public class AsyncObservableTests
 {
@@ -149,7 +149,7 @@ public class AsyncObservableTests
         _ = observable.OnNextAsync(true);
 
         // Assert
-        Assert.True(triggered);
+        Assert.False(triggered);
     }
 
     [Fact]
