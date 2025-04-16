@@ -6,7 +6,6 @@ public class AsyncObservableExtensionsTests
     public void Subscribe_WhenCallbacksPassed_ShouldReturnCorrectObservableSubscriptionResult()
     {
         // Arrange
-        // Arrange
         var expectedResult = new TestDisposable();
         IAsyncObservable<bool> observable = new TestAsyncObservable<bool>(_ => expectedResult);
 

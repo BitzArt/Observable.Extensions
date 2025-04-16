@@ -7,7 +7,7 @@ public class AsyncObservableTests
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool> observable = new();
+        AsyncObservable<bool?> observable = new();
 
         observable.Subscribe(onNext: (_) =>
         {
@@ -15,7 +15,7 @@ public class AsyncObservableTests
         });
 
         // Act
-        _ = observable.OnNextAsync(true);
+        _ = observable.OnNextAsync(null!);
 
         // Assert
         Assert.True(triggered);
@@ -57,7 +57,7 @@ public class AsyncObservableTests
             onNext: (_) => { });
 
         // Act
-        _ = observable.OnErrorAsync(new Exception());
+        _ = observable.OnErrorAsync(null!);
 
         // Assert
         Assert.True(triggered);
@@ -68,7 +68,7 @@ public class AsyncObservableTests
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool> observable = new();
+        AsyncObservable<bool?> observable = new();
 
         observable.Subscribe(onNext: async (_) =>
         {
@@ -77,7 +77,7 @@ public class AsyncObservableTests
         });
 
         // Act / Assert
-        var task = observable.OnNextAsync(true);
+        var task = observable.OnNextAsync(null!);
         Assert.False(triggered);
 
         await task;
@@ -123,7 +123,7 @@ public class AsyncObservableTests
             onNext: async (_) => await Task.CompletedTask);
 
         // Act / Assert
-        var task = observable.OnErrorAsync(new Exception());
+        var task = observable.OnErrorAsync(null!);
         Assert.False(triggered);
 
         await task;
@@ -135,7 +135,7 @@ public class AsyncObservableTests
     {
         // Arrange
         bool triggered = false;
-        AsyncObservable<bool> observable = new();
+        AsyncObservable<bool?> observable = new();
 
         var subscription = observable.Subscribe(
             onNext: (value) =>
@@ -146,7 +146,7 @@ public class AsyncObservableTests
         subscription.Dispose();
 
         // Act
-        _ = observable.OnNextAsync(true);
+        _ = observable.OnNextAsync(null!);
 
         // Assert
         Assert.False(triggered);
@@ -192,7 +192,7 @@ public class AsyncObservableTests
         subscription.Dispose();
 
         // Act
-        _ = observable.OnErrorAsync(new Exception());
+        _ = observable.OnErrorAsync(null!);
 
         // Assert
         Assert.False(triggered);
@@ -203,7 +203,7 @@ public class AsyncObservableTests
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool> observable = new();
+        AsyncObservable<bool?> observable = new();
 
         var subsciption = observable.Subscribe(onNext: async (_) =>
         {
@@ -214,7 +214,7 @@ public class AsyncObservableTests
         subsciption.Dispose();
 
         // Act / Assert
-        var task = observable.OnNextAsync(true);
+        var task = observable.OnNextAsync(null!);
         Assert.False(triggered);
 
         await task;
@@ -264,7 +264,7 @@ public class AsyncObservableTests
         subscription.Dispose();
 
         // Act / Assert
-        var task = observable.OnErrorAsync(new Exception());
+        var task = observable.OnErrorAsync(null!);
         Assert.False(triggered);
 
         await task;
