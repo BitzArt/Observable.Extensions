@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BitzArt;
+﻿namespace BitzArt;
 
 /// <summary>
 /// <inheritdoc cref="IObserver{T}"/>

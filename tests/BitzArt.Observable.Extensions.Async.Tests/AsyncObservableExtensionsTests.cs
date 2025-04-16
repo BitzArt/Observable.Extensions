@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace BitzArt.Observable.Extensions.Tests;
+﻿namespace BitzArt.Observable.Extensions.Tests;
 
 public class AsyncObservableExtensionsTests
 {
@@ -11,7 +9,7 @@ public class AsyncObservableExtensionsTests
         IAsyncObservable<bool> observable = new AsyncObservable<bool>();
 
         // Act
-        var subscription = observable.Subscribe(async (_) 
+        var subscription = observable.Subscribe(async (_)
             => await Task.CompletedTask);
 
         // Assert

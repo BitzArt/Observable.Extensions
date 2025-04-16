@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BitzArt;
+﻿namespace BitzArt;
 
 /// <summary>
 /// Defines a provider for async push-based event notifications.

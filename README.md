@@ -5,15 +5,7 @@
 
 ## Overview
 
-**BitzArt.Observable.Extensions** is a nuget package that provides various IObservable functionality extensions.
-
-### Installation
-
-- Install the following package in your project:
-
-```
-dotnet add package BitzArt.Observable.Extensions
-```
+Various IObservable functionality extensions.
 
 ## License
 

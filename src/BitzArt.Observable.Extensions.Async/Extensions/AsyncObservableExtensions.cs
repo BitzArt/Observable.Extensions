@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace BitzArt;
+﻿namespace BitzArt;
 
 /// <summary>
 /// Extension methods for <see cref="IAsyncObservable{T}"/>.

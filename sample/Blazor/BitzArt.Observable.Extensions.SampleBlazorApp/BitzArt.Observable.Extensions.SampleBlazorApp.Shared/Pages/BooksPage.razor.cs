@@ -14,8 +14,9 @@ public partial class BooksPage : ComponentBase, IDisposable
 
     private async Task OnAuthorSelectedAsync(ChangeEventArgs args)
     {
-        var id = args.Value!.ToString();
-        var author = _authors.First(x => x.Id!.ToString() == id);
+        var id = Int32.Parse(args.Value!.ToString()!);
+        var author = _authors.First(x => x.Id == id);
+
         await _authorObservable.OnNextAsync(author);
     }
 

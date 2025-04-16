@@ -1,14 +1,14 @@
 ﻿@namespace BitzArt.Observable.Extensions.SampleBlazorApp
 
 @page "/books"
-@rendermode InteractiveServer
+@rendermode InteractiveWebAssembly
 
 <PageTitle>Books Page</PageTitle>
 
 <div class="container mt-4">
     <div class="mb-3">
-        <label for="authorSelect" class="form-label fw-bold">Select an author:</label>
-        <select id="authorSelect" class="form-select" @onchange="OnAuthorSelectedAsync">
+        <h6 class="fw-bold">Author:</h6>
+        <select id="author-select" class="form-select" @onchange="OnAuthorSelectedAsync">
             <option selected hidden>-</option>
             @foreach (var author in _authors)
             {

@@ -31,6 +31,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Async.Tests", "tests\BitzArt.Observable.Extensions.Async.Tests\BitzArt.Observable.Extensions.Async.Tests.csproj", "{66C046C2-DAA8-458F-B1FE-1979F0041444}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0494A74D-EB49-4713-93F6-F9323DF95EC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C637DE46-F5EE-4270-9ACF-CFED94F24FB1}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\Publish.yml = .github\workflows\Publish.yml
+		.github\workflows\Tests.yml = .github\workflows\Tests.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +86,7 @@ Global
 		{49A5B477-B872-428F-BA91-56DCA8F57576} = {F926F81D-2674-446D-91D5-6BB31CCC3EB5}
 		{2036E260-705D-4231-8B68-3B2169E5674C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{66C046C2-DAA8-458F-B1FE-1979F0041444} = {E7955EA7-184B-4659-B4EB-3F722BE809F8}
+		{C637DE46-F5EE-4270-9ACF-CFED94F24FB1} = {0494A74D-EB49-4713-93F6-F9323DF95EC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9A5B06D-7CA0-4B29-B6A7-780E91E61DCE}

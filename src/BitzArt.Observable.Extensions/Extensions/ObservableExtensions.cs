@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BitzArt;
+﻿namespace BitzArt;
 
 /// <summary>
 /// Extension methods for <see cref="IObservable{T}"/>.
