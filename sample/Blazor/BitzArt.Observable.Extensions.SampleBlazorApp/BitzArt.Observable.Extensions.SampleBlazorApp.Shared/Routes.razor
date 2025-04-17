@@ -1,0 +1,8 @@
+﻿@namespace BitzArt.Observable.Extensions.SampleBlazorApp
+
+<Router AppAssembly="@(this.GetType().Assembly)">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+</Router>

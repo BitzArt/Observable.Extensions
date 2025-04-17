@@ -1,0 +1,42 @@
+﻿@namespace BitzArt.Observable.Extensions.SampleBlazorApp
+
+@page "/books"
+@rendermode InteractiveWebAssembly
+
+<PageTitle>Books Page</PageTitle>
+
+<div class="container mt-4">
+    <div class="mb-3">
+        <h6 class="fw-bold">Author:</h6>
+        <select id="author-select" class="form-select" @onchange="OnAuthorSelectedAsync">
+            <option selected hidden>-</option>
+            @foreach (var author in _authors)
+            {
+                <option value="@author.Id">
+                    @author.Name
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="mt-4">
+        <h6 class="fw-bold">Books List:</h6>
+
+        @if (_isLoading)
+        {
+            <div class="text-muted">
+                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                Loading...
+            </div>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var book in _books)
+                {
+                    <li class="list-group-item">@book.Title</li>
+                }
+            </ul>
+        }
+    </div>
+</div>
