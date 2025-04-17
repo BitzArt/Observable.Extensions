@@ -6,9 +6,9 @@ public partial class BooksPage : ComponentBase
 {
     private readonly AsyncObservable<Author> _authorObservable = new();
 
-    private readonly List<Author> _authors = [.. SampleData.Authors];
+    private readonly List<Author> _authors = new(SampleData.Authors);
 
-    private List<Book> _books = [];
+    private List<Book> _books = new();
 
     private bool _isLoading = false;
 
