@@ -36,6 +36,8 @@ public partial class BooksPage : ComponentBase
     {
         // Simulate async operation
         await Task.Delay(500);
-        return [.. SampleData.Books.Where(x => x.AuthorId == authorId)];
+        return SampleData.Books
+            .Where(x => x.AuthorId == authorId)
+            .ToList();
     }
 }
