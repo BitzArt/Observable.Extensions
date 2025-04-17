@@ -68,18 +68,17 @@ public class AsyncObservableTests
     {
         // Arrange
         var triggered = false;
-        AsyncObservable<bool?> observable = new();
-
-        var subsciption = observable.Subscribe(onNext: async (_) =>
+        
+        var sut = new AsyncObservableSut<bool?>(onNext: async (_) =>
         {
             await Task.Delay(100);
             triggered = true;
         });
 
-        subsciption.Dispose();
+        sut.Subscription.Dispose();
 
         // Act / Assert
-        var task = observable.OnNextAsync(null!);
+        var task = sut.Observable.OnNextAsync(null!);
         Assert.False(triggered);
 
         await task;
