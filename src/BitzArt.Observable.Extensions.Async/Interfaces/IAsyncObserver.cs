@@ -1,9 +1,9 @@
 ﻿namespace BitzArt;
 
 /// <summary>
-/// Provides a mechanism for receiving asynchronous event notifications.
+/// Provides a mechanism for receiving asynchronous push-based notifications.
 /// </summary>
-/// <typeparam name="T">The type of the event data.</typeparam>
+/// <typeparam name="T">The type of object that provides notification information.</typeparam>
 public interface IAsyncObserver<T>
 {
     /// <inheritdoc cref="IObserver{T}.OnNext(T)"/>
