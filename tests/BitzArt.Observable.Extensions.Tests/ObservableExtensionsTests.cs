@@ -56,7 +56,7 @@ public class ObservableExtensionsTests
             onNext: (_) => { });
 
         // Assert
-        await observable.OnErrorAsync(new Exception());
+        await observable.OnErrorAsync(null!);
         Assert.True(triggered);
     }
 }

@@ -65,7 +65,7 @@ public class AsyncObservableExtensionsTests
             onNext: async (_) => await Task.CompletedTask);
 
         // Assert
-        var task = observable.OnErrorAsync(new Exception());
+        var task = observable.OnErrorAsync(null!);
         Assert.False(triggered);
 
         await task;

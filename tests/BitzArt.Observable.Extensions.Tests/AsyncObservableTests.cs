@@ -26,7 +26,7 @@ public class AsyncObservableTests
     public async Task OnCompletedAsync_WhenHasSubscriber_ShouldNotifySubscriber()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
+        var observable = new AsyncObservable<bool>();
         var triggered = false;
 
         observable.Subscribe(
@@ -47,7 +47,7 @@ public class AsyncObservableTests
     public async Task OnErrorAsync_WhenHasSubscriber_ShouldNotifySubscriber()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
+        var observable = new AsyncObservable<bool>();
         var triggered = false;
 
         observable.Subscribe(
@@ -58,7 +58,7 @@ public class AsyncObservableTests
             onNext: (_) => { });
 
         // Act
-        await observable.OnErrorAsync(new Exception());
+        await observable.OnErrorAsync(null!);
 
         // Assert
         Assert.True(triggered);
@@ -90,7 +90,7 @@ public class AsyncObservableTests
     public async Task OnCompletedAsync_WhenHasAsyncSubscriber_ShouldAwait()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
+        var observable = new AsyncObservable<bool>();
         var triggered = false;
 
         observable.Subscribe(
@@ -113,7 +113,7 @@ public class AsyncObservableTests
     public async Task OnErrorAsync_WhenHasAsyncSubscriber_ShouldAwait()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
+        var observable = new AsyncObservable<bool>();
         var triggered = false;
 
         observable.Subscribe(
@@ -125,7 +125,7 @@ public class AsyncObservableTests
             onNext: async (_) => await Task.CompletedTask);
 
         // Act / Assert
-        var task = observable.OnErrorAsync(new Exception());
+        var task = observable.OnErrorAsync(null!);
         Assert.False(triggered);
 
         await task;
@@ -191,7 +191,7 @@ public class AsyncObservableTests
     public async Task OnCompletedAsync_AfterUnsubscribed_ShouldNotNotify()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
+        var observable = new AsyncObservable<bool>();
 
         var triggered = false;
         var subscription = observable.Subscribe(
@@ -214,7 +214,7 @@ public class AsyncObservableTests
     public async Task OnErrorAsync_AfterUnsubscribed_ShouldNotNotify()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
+        var observable = new AsyncObservable<bool>();
         var triggered = false;
 
         var subscription = observable.Subscribe(
@@ -227,7 +227,7 @@ public class AsyncObservableTests
         subscription.Dispose();
 
         // Act
-        await observable.OnErrorAsync(new Exception());
+        await observable.OnErrorAsync(null!);
 
         // Assert
         Assert.False(triggered);
@@ -251,7 +251,7 @@ public class AsyncObservableTests
     public async Task Dispose_WhenNotPreviouslyDisposed_OnCompletedShouldThrowException()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
+        var observable = new AsyncObservable<bool>();
 
         // Act
         observable.Dispose();
@@ -272,7 +272,7 @@ public class AsyncObservableTests
 
         // Assert
         await Assert.ThrowsAsync<ObjectDisposedException>(async ()
-            => await observable.OnErrorAsync(new Exception()));
+            => await observable.OnErrorAsync(null!));
     }
 
     [Fact]
