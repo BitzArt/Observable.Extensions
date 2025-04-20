@@ -234,19 +234,6 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public void Dispose_WhenAlreadyDisposed_ShouldThrowObjectDisposedException()
-    {
-        // Arrange
-        var observable = new AsyncObservable<bool?>();
-        observable.Subscribe(onNext: (_) => { });
-
-        observable.Dispose();
-
-        // Act / Assert
-        Assert.Throws<ObjectDisposedException>(() => observable.Dispose());
-    }
-
-    [Fact]
     public async Task Dispose_WhenNotPreviouslyDisposed_OnNextShouldThrowException()
     {
         // Arrange
@@ -291,5 +278,18 @@ public class AsyncObservableTests
         // Assert
         await Assert.ThrowsAsync<ObjectDisposedException>(async ()
             => await observable.OnErrorAsync(new Exception()));
+    }
+
+    [Fact]
+    public void Dispose_WhenAlreadyDisposed_ShouldThrowObjectDisposedException()
+    {
+        // Arrange
+        var observable = new AsyncObservable<bool?>();
+        observable.Subscribe(onNext: (_) => { });
+
+        observable.Dispose();
+
+        // Act / Assert
+        Assert.Throws<ObjectDisposedException>(() => observable.Dispose());
     }
 }
