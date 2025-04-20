@@ -3,7 +3,7 @@
 public class AsyncObservableExtensionsTests
 {
     [Fact]
-    public async Task Subscribe_WhenOnNextCallbackPassed_ShouldStartTrigger()
+    public async Task Subscribe_WhenOnNextCallbackPassed_ShouldAwaitCallback()
     {
         // Arrange
         var observable = new AsyncObservable<bool>();
@@ -12,17 +12,20 @@ public class AsyncObservableExtensionsTests
         // Act
         observable.Subscribe(onNext: async (_) =>
         {
+            await Task.Delay(100);
             triggered = true;
-            await Task.CompletedTask;
         });
 
         // Assert
-        await observable.OnNextAsync(true);
+        var task = observable.OnNextAsync(true);
+        Assert.False(triggered);
+
+        await task;
         Assert.True(triggered);
     }
 
     [Fact]
-    public async Task Subscribe_WhenOnCompletedCallbackPassed_ShouldStartTrigger()
+    public async Task Subscribe_WhenOnCompletedCallbackPassed_ShouldAwaitCallback()
     {
         // Arrange
         var observable = new AsyncObservable<bool>();
@@ -32,18 +35,21 @@ public class AsyncObservableExtensionsTests
         observable.Subscribe(
             onCompleted: async () =>
             {
+                await Task.Delay(100);
                 triggered = true;
-                await Task.CompletedTask;
             },
             onNext: async (_) => await Task.CompletedTask);
 
         // Assert
-        await observable.OnCompletedAsync();
+        var task = observable.OnCompletedAsync();
+        Assert.False(triggered);
+
+        await task;
         Assert.True(triggered);
     }
 
     [Fact]
-    public async Task Subscribe_WhenOnErrorCallbackPassed_ShouldStartTrigger()
+    public async Task Subscribe_WhenOnErrorCallbackPassed_ShouldAwaitCallback()
     {
         // Arrange
         var observable = new AsyncObservable<bool>();
@@ -53,13 +59,16 @@ public class AsyncObservableExtensionsTests
         observable.Subscribe(
             onError: async (_) =>
             {
+                await Task.Delay(100);
                 triggered = true;
-                await Task.CompletedTask;
             },
             onNext: async (_) => await Task.CompletedTask);
 
         // Assert
-        await observable.OnErrorAsync(new Exception());
+        var task = observable.OnErrorAsync(new Exception());
+        Assert.False(triggered);
+
+        await task;
         Assert.True(triggered);
     }
 }
