@@ -238,9 +238,7 @@ public class AsyncObservableTests
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
-
-        observable.Subscribe(
-            onNext: (_) => { });
+        observable.Subscribe(onNext: (_) => { });
 
         // Act
         observable.Dispose();
