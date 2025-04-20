@@ -133,7 +133,7 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public async Task Unsubscription_AfterSubscribed_ShouldStopReceivingNotifications()
+    public async Task Unsubscription_AfterSubscribed_SubscriberShouldStopReceivingNotifications()
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
