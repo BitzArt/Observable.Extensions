@@ -3,25 +3,25 @@
 public class ObservableExtensionsTests
 {
     [Fact]
-    public async Task Subscribe_OnNextCallbackPassed_ShouldStartTrigger()
+    public async Task Subscribe_WhenOnNextCallbackPassed_ShouldStartTrigger()
     {
         // Arrange
         var observable = new AsyncObservable<bool>();
-        var trriggered = false;
+        var triggered = false;
 
         // Act
         observable.Subscribe(onNext: (_) =>
         {
-            trriggered = true;
+            triggered = true;
         });
 
         // Assert
         await observable.OnNextAsync(true);
-        Assert.True(trriggered);
+        Assert.True(triggered);
     }
 
     [Fact]
-    public async Task Subscribe_OnCompletedCallbackPassed_ShouldStartTrigger()
+    public async Task Subscribe_WhenOnCompletedCallbackPassed_ShouldStartTrigger()
     {
         // Arrange
         var observable = new AsyncObservable<bool>();
@@ -41,7 +41,7 @@ public class ObservableExtensionsTests
     }
 
     [Fact]
-    public async Task Subscribe_OnErrorCallbackPassed_ShouldStartTrigger()
+    public async Task Subscribe_WhenOnErrorCallbackPassed_ShouldStartTrigger()
     {
         // Arrange
         var observable = new AsyncObservable<bool>();

@@ -3,7 +3,7 @@
 public class AsyncObservableTests
 {
     [Fact]
-    public async Task OnNextAsync_WhenHasSubscriber_ShouldNotifySubriber()
+    public async Task OnNextAsync_WhenHasSubscriber_ShouldNotifySubscriber()
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
@@ -23,7 +23,7 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public async Task OnCompletedAsync_WhenHasSubscriber_ShouldNotifySubriber()
+    public async Task OnCompletedAsync_WhenHasSubscriber_ShouldNotifySubscriber()
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
@@ -44,7 +44,7 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public async Task OnErrorAsync_WhenHasSubscriber_ShouldNotifySubriber()
+    public async Task OnErrorAsync_WhenHasSubscriber_ShouldNotifySubscriber()
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
@@ -133,7 +133,7 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public async Task Unsubscribtion_AfterSubscribed_ShouldStopReceivingNotifications()
+    public async Task Unsubscription_AfterSubscribed_ShouldStopReceivingNotifications()
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
@@ -154,7 +154,7 @@ public class AsyncObservableTests
     }
 
     [Fact]
-    public void Unsubscribtion_WhenAlreadyUnsubscribed_ShouldThrowObjectDisposedException()
+    public void Unsubscription_WhenAlreadyUnsubscribed_ShouldThrowObjectDisposedException()
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
