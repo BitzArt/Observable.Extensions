@@ -238,7 +238,6 @@ public class AsyncObservableTests
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
-        observable.Subscribe(onNext: (_) => { });
 
         // Act
         observable.Dispose();
@@ -253,7 +252,6 @@ public class AsyncObservableTests
     {
         // Arrange
         var observable = new AsyncObservable<bool?>();
-        observable.Subscribe(onNext: (_) => { });
 
         // Act
         observable.Dispose();
@@ -267,8 +265,7 @@ public class AsyncObservableTests
     public async Task Dispose_WhenNotPreviouslyDisposed_OnErrorShouldThrowException()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
-        observable.Subscribe(onNext: (_) => { });
+        var observable = new AsyncObservable<bool>();
 
         // Act
         observable.Dispose();
@@ -282,9 +279,7 @@ public class AsyncObservableTests
     public void Dispose_WhenAlreadyDisposed_ShouldThrowObjectDisposedException()
     {
         // Arrange
-        var observable = new AsyncObservable<bool?>();
-        observable.Subscribe(onNext: (_) => { });
-
+        var observable = new AsyncObservable<bool>();
         observable.Dispose();
 
         // Act / Assert
