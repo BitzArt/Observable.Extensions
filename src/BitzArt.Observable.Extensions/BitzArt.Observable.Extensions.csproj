@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net9.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>BitzArt</RootNamespace>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<PackageId>BitzArt.Observable.Extensions</PackageId>
+		<Authors>BitzArt</Authors>
+		<Description>Various IObservable functionality extensions</Description>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/BitzArt/Observable.Extensions</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/BitzArt/Observable.Extensions</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj" />
+	</ItemGroup>
+
+</Project>

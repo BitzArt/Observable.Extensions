@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions", "src\BitzArt.Observable.Extensions\BitzArt.Observable.Extensions.csproj", "{A29AED14-45BD-4139-980C-8A90F20A3FAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E7955EA7-184B-4659-B4EB-3F722BE809F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{0DFCB4D0-E93E-493A-ABC2-2E28C417EDBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{F926F81D-2674-446D-91D5-6BB31CCC3EB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.SampleBlazorApp", "sample\Blazor\BitzArt.Observable.Extensions.SampleBlazorApp\BitzArt.Observable.Extensions.SampleBlazorApp\BitzArt.Observable.Extensions.SampleBlazorApp.csproj", "{1653CB3C-7CB3-4E46-A463-F7DCD8E4235F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.SampleBlazorApp.Client", "sample\Blazor\BitzArt.Observable.Extensions.SampleBlazorApp\BitzArt.Observable.Extensions.SampleBlazorApp.Client\BitzArt.Observable.Extensions.SampleBlazorApp.Client.csproj", "{EB7E380A-FAA5-4DA9-856D-17DB6D6BE586}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.SampleBlazorApp.Shared", "sample\Blazor\BitzArt.Observable.Extensions.SampleBlazorApp\BitzArt.Observable.Extensions.SampleBlazorApp.Shared\BitzArt.Observable.Extensions.SampleBlazorApp.Shared.csproj", "{49A5B477-B872-428F-BA91-56DCA8F57576}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{29F51852-DE00-405B-B1A0-D88EB617F83A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Async", "src\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj", "{2036E260-705D-4231-8B68-3B2169E5674C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0494A74D-EB49-4713-93F6-F9323DF95EC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C637DE46-F5EE-4270-9ACF-CFED94F24FB1}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\Publish.yml = .github\workflows\Publish.yml
+		.github\workflows\Tests.yml = .github\workflows\Tests.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Tests", "tests\BitzArt.Observable.Extensions.Tests\BitzArt.Observable.Extensions.Tests.csproj", "{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A29AED14-45BD-4139-980C-8A90F20A3FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29AED14-45BD-4139-980C-8A90F20A3FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29AED14-45BD-4139-980C-8A90F20A3FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29AED14-45BD-4139-980C-8A90F20A3FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1653CB3C-7CB3-4E46-A463-F7DCD8E4235F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1653CB3C-7CB3-4E46-A463-F7DCD8E4235F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1653CB3C-7CB3-4E46-A463-F7DCD8E4235F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1653CB3C-7CB3-4E46-A463-F7DCD8E4235F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB7E380A-FAA5-4DA9-856D-17DB6D6BE586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB7E380A-FAA5-4DA9-856D-17DB6D6BE586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB7E380A-FAA5-4DA9-856D-17DB6D6BE586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB7E380A-FAA5-4DA9-856D-17DB6D6BE586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A5B477-B872-428F-BA91-56DCA8F57576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A5B477-B872-428F-BA91-56DCA8F57576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A5B477-B872-428F-BA91-56DCA8F57576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A5B477-B872-428F-BA91-56DCA8F57576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2036E260-705D-4231-8B68-3B2169E5674C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2036E260-705D-4231-8B68-3B2169E5674C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2036E260-705D-4231-8B68-3B2169E5674C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2036E260-705D-4231-8B68-3B2169E5674C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A29AED14-45BD-4139-980C-8A90F20A3FAB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F926F81D-2674-446D-91D5-6BB31CCC3EB5} = {0DFCB4D0-E93E-493A-ABC2-2E28C417EDBD}
+		{1653CB3C-7CB3-4E46-A463-F7DCD8E4235F} = {F926F81D-2674-446D-91D5-6BB31CCC3EB5}
+		{EB7E380A-FAA5-4DA9-856D-17DB6D6BE586} = {F926F81D-2674-446D-91D5-6BB31CCC3EB5}
+		{49A5B477-B872-428F-BA91-56DCA8F57576} = {F926F81D-2674-446D-91D5-6BB31CCC3EB5}
+		{2036E260-705D-4231-8B68-3B2169E5674C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{C637DE46-F5EE-4270-9ACF-CFED94F24FB1} = {0494A74D-EB49-4713-93F6-F9323DF95EC5}
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E} = {E7955EA7-184B-4659-B4EB-3F722BE809F8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9A5B06D-7CA0-4B29-B6A7-780E91E61DCE}
+	EndGlobalSection
+EndGlobal
