@@ -27,8 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{29F51852-DE0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Async", "src\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj", "{2036E260-705D-4231-8B68-3B2169E5674C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Tests", "tests\BitzArt.Observable.Extensions.Async.Tests\BitzArt.Observable.Extensions.Tests.csproj", "{66C046C2-DAA8-458F-B1FE-1979F0041444}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0494A74D-EB49-4713-93F6-F9323DF95EC5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C637DE46-F5EE-4270-9ACF-CFED94F24FB1}"
@@ -36,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\Publish.yml = .github\workflows\Publish.yml
 		.github\workflows\Tests.yml = .github\workflows\Tests.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitzArt.Observable.Extensions.Tests", "tests\BitzArt.Observable.Extensions.Tests\BitzArt.Observable.Extensions.Tests.csproj", "{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,10 @@ Global
 		{2036E260-705D-4231-8B68-3B2169E5674C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2036E260-705D-4231-8B68-3B2169E5674C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2036E260-705D-4231-8B68-3B2169E5674C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66C046C2-DAA8-458F-B1FE-1979F0041444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66C046C2-DAA8-458F-B1FE-1979F0041444}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66C046C2-DAA8-458F-B1FE-1979F0041444}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66C046C2-DAA8-458F-B1FE-1979F0041444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,8 +78,8 @@ Global
 		{EB7E380A-FAA5-4DA9-856D-17DB6D6BE586} = {F926F81D-2674-446D-91D5-6BB31CCC3EB5}
 		{49A5B477-B872-428F-BA91-56DCA8F57576} = {F926F81D-2674-446D-91D5-6BB31CCC3EB5}
 		{2036E260-705D-4231-8B68-3B2169E5674C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{66C046C2-DAA8-458F-B1FE-1979F0041444} = {E7955EA7-184B-4659-B4EB-3F722BE809F8}
 		{C637DE46-F5EE-4270-9ACF-CFED94F24FB1} = {0494A74D-EB49-4713-93F6-F9323DF95EC5}
+		{1C67577C-9B4C-3FF6-77A9-5212AFA8822E} = {E7955EA7-184B-4659-B4EB-3F722BE809F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9A5B06D-7CA0-4B29-B6A7-780E91E61DCE}

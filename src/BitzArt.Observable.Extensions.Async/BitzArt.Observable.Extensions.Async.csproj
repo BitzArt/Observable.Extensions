@@ -6,6 +6,14 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>BitzArt</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<PackageId>BitzArt.Observable.Extensions.Async</PackageId>
+		<Authors>BitzArt</Authors>
+		<Description>Various IObservable asynchronous functionality extensions</Description>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/BitzArt/Observable.Extensions</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/BitzArt/Observable.Extensions</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
