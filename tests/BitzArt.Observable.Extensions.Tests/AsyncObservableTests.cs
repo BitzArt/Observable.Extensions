@@ -149,7 +149,7 @@ public class AsyncObservableTests
         subscription.Dispose();
 
         // Assert
-        await observable.OnNextAsync(null!);
+        await observable.OnNextAsync(null!); // Consider to use different way to check this assertion
         Assert.False(triggered);
     }
 
