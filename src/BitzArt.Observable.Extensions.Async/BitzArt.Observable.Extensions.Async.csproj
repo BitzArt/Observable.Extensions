@@ -17,6 +17,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\..\README.md" Pack="True" Visible="False" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="BitzArt.CoreExtensions" Version="1.2.4" />
 	</ItemGroup>
 

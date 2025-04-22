@@ -17,6 +17,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\..\README.md" Pack="True" Visible="False" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\BitzArt.Observable.Extensions.Async\BitzArt.Observable.Extensions.Async.csproj" />
 	</ItemGroup>
 
